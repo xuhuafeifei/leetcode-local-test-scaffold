@@ -1,7 +1,8 @@
 package com.leetcode;
 
+import com.leetcode.common.Constant;
+
 import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * ClassName: CodeScanner
@@ -25,7 +26,18 @@ public class CodeScanner {
     // 扫描核心代码
     public void doScan() {
         Class<Solution> clazz = Solution.class;
-        Method coreMethod = clazz.getMethods()[0];
+        Method coreMethod = null;
+        String methodName = LeetCodeRunner.getEnv().getProperty(Constant.METHOD_NAME);
+        // 匹配核心方法名称, 默认读取扫描得到的第一个方法, 如果配置文件给出的方法能够找到, 优先配置文件
+        for (Method method : clazz.getMethods()) {
+            // 不考虑重载
+            if (method.getName().equals(methodName)) {
+                coreMethod = method;
+                break;
+            }
+        }
+        if (coreMethod == null) coreMethod = clazz.getMethods()[0];
+
         this.methodName = coreMethod.getName();
         this.types = coreMethod.getParameterTypes();
         this.argc = coreMethod.getParameterCount();

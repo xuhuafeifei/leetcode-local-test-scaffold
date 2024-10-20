@@ -2,6 +2,9 @@ import com.leetcode.CodeScanner;
 import com.leetcode.CommonObject.ListNode;
 import com.leetcode.CommonObject.TreeNode;
 import com.leetcode.Converter;
+import com.leetcode.LeetCodeRunner;
+import com.leetcode.common.Constant;
+import com.leetcode.common.Environment;
 import com.leetcode.convert.*;
 import com.leetcode.utils.PackageScanner;
 
@@ -47,7 +50,8 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testConvert() {
+    public void testConvert() throws Exception {
+        LeetCodeRunner.main(new String[]{});
         Converter converter = new Converter();
     }
 
@@ -64,5 +68,23 @@ public class Test {
         ConvertToListNode convertToListNode = new ConvertToListNode();
         ListNode node = (ListNode) convertToListNode.invoke("[1,2,3,4,5]");
         node.print();
+    }
+
+    @org.junit.Test
+    public void testClassFor() throws Exception {
+        Class<?> aClass = Class.forName("com.leetcode.Solution");
+        Object o = aClass.newInstance();
+        System.out.println(o);
+    }
+
+    @org.junit.Test
+    public void testEnviroment() {
+        Environment environment = new Environment();
+        assert "com.leetcode.Solution".equals(environment.getProperty(Constant.CORE_CODE));
+        assert "com.leetcode.convert".equals(environment.getProperty(Constant.SCAN_CONVERT_PATH));
+        PackageScanner scanner = environment.getScanner("com.leetcode.convert");
+        for (Object aClass : scanner.getClasses()) {
+            System.out.println(aClass.getClass());
+        }
     }
 }

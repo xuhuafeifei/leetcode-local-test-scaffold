@@ -1,5 +1,6 @@
 package com.leetcode;
 
+import com.leetcode.common.Constant;
 import com.leetcode.convert.*;
 import com.leetcode.utils.PackageScanner;
 
@@ -27,7 +28,8 @@ public class Converter {
         handlerMap = new HashMap<>();
         // 初始化
         try {
-            List<ConvertFunc> convertFunc = new PackageScanner("com.leetcode.convert").getClasses()
+            // 从环境中获取扫描的包
+            List<ConvertFunc> convertFunc = LeetCodeRunner.getEnv().getScanner(Constant.SCAN_CONVERT_PATH).getClasses()
                     .stream().filter(k -> k instanceof ConvertFunc)
                     .map(k -> (ConvertFunc) k)
                     .collect(Collectors.toList());

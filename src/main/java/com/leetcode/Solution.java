@@ -1,21 +1,7 @@
 package com.leetcode;
 
 import com.leetcode.CommonObject.ListNode;
-import com.leetcode.CommonObject.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-/**
- * ClassName: Solution
- * Package: com.leetcode
- * Description:
- *
- * @Author: fgbg
- * @Create: 2024/10/19 - 2:52
- */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0, head);
@@ -29,7 +15,7 @@ class Solution {
         return ans;
     }
 
-    private int getLength(ListNode head) {
+    public int getLength(ListNode head) {
         int length = 0;
         while (head != null) {
             ++length;

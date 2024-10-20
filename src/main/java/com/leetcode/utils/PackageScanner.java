@@ -40,6 +40,7 @@ public class PackageScanner {
                 Object o = Class.forName(qualifiedName).newInstance();
                 classes.add(o);
             } catch (InstantiationException e) {
+                System.out.println("class " + qualifiedName + " is abstract, can not instance");
             }
         } else if (file.isDirectory()) {
             for (File f : file.listFiles())
